@@ -1,0 +1,85 @@
+//en este Proceso recorro el array de resultados para seleccionar el día mas frio, el mas caluroso, las correspondientes temperaturas
+// y el mes de cada día
+
+SubProceso recorrerResultados(resultados que es un array 12*5 de reales) 
+	Definir maxima y mínima real
+	Definir diaMasFrio Como Real
+	Definir diaMasCaluroso Como Real
+	definir mesMasfrio, mesMascaluroso Como Entero
+	maxima=0, minima=100
+	Para indice=0 hasta 11 Con Paso 1 Hacer
+		
+		Si resultados[indice][2] >maxima Entonces // temperatura máxima
+			maxima=resultados[indice][2] 
+			diaMasCaluroso=resultados[indice][1] 
+			mesMasCaluroso=indice+1
+		Fin Si
+		Si resultados[indice][4] < minima Entonces // temperatura máxima
+			minima=resultados[indice][4] 
+			diaMasFrio=resultados[indice][3] 
+			mesMasFrio=indice+1
+		Fin Si
+		
+	Fin Para
+	mostrar maxima, diaMasCaluroso, mesMasCaluroso, minima,diasMasFrio y mesMasFrio;
+	
+Fin SubProceso
+
+//con este método monto el array meses de 12*31 con los datos de las temperaturas medias por cada día de cada mes
+//y aparte monto la primera y segunda columna del array resultados de 12*5 con la temperatura 
+//media del mes, el dia mas frio, el dia mas caluroso y las correspondientes temperaturas
+SubProceso  cargarArray ( meses que es un array12x31 de reales, 
+						resultados que es un array 12*5 de reales)
+	Definir media, maxima y mínima real
+	Definir diaMasFrio Como Entera
+	Definir diaMasCaluroso Como Entera
+	Para i=0 Hasta i<12 Con Paso 1 Hacer
+		media=0;
+		máxima=0;
+		mínima=100;
+		diaMasfrio=0;
+		diasMasCaluroso=0;
+		dias=calcularDiasdelMes(i); // se calculan los días que tiene el mes 	
+		Para j=0 Hasta j<dias Con Paso 1 Hacer
+				meses[i][j] =random (10,25);
+				media = media+ meses[i][j]
+				Si máxima<meses [i][j]  Entonces
+					maxima=meses [i][j];
+					diaMasCaluroso=j+1;
+				Fin Si
+				Si mínima>meses [i][j]  Entonces
+					mínima=meses [i][j]
+					diaMasFrio=j+1;
+				Fin Si
+			Fin Para
+			media=media/dias
+			
+	
+		//antes de incrementar el numero de filas, cargo en el array de resultados en la misma fila, 
+		//las columna con el numero del mes, la media, la temeperatura maxima del mes y la mínima y los correspondientes días
+		resultados[i][0]=media; //temperatura media del mes
+		resultados[i][1]=diaMasCaluroso; //dia con la temperatura maxima del mes
+		resultados[i][2]=maxima; //temperatura maxima del mes
+		resultados[i][3]=diaMasFrio; //dia con la temperatura minima del mes
+		resultados[i][4]=minima; //temperatura minima del mes
+	Fin Para
+Fin SubProceso
+
+
+Algoritmo Programa_Principal
+	Inicio
+	//En este array meses meteremos los datos de las temperaturas de los 12 meses 
+	Definir meses = Array de 12X31 de enteros;
+	// En este array resultados meteremos por cada mes la temperatura media, el día más caluroso, el día más frio y las correspondientes temperaturas
+	Definir resultados=Array de 12x5 de reales
+	// llenamos el array de 12x31 con datos aleatorios con el método cargarArray() e iremos calculando las columnas del
+	// array de resultados (temperatura media, maxima y minima y los correspondientes dias )
+ 	cargarArray(meses, resultados); 
+	//con los métodos siguientes calculamos los datos que nos pide el ejercicio
+	Mostrar temperaturaMediaPorMes(resultados); // con este metodo recorro el array de resultados y muestro la columnas 0 que tiene la media de temperatura del mes
+	Mostrar díaMasYMenosCalurosoPorMes(resultados); // con este metodo recorro el array de resultados y muestro las columnas 1 2,3,4  que tienen y 
+	//los días y temperaturas máximas y mínimas
+	recorrerResultados(resultados); // metodo para recorrer el array y Mostrar el días mas caluroso y el  más frío, y el mes/dia que corresponden
+	
+Fin Programa_Principal
+
